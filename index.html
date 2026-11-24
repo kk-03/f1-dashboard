@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1 Telemetry Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <header>
+    <h1>F1 Telemetry Dashboard</h1>
+    <p class="subtitle">Data from <a href="https://openf1.org" target="_blank" rel="noopener">OpenF1</a></p>
+  </header>
+
+  <section class="controls">
+    <label>Year
+      <select id="year"></select>
+    </label>
+    <label>Race
+      <select id="meeting"></select>
+    </label>
+    <label>Session
+      <select id="session"></select>
+    </label>
+    <label class="checkbox">
+      <input type="checkbox" id="hideSlow" checked>
+      Hide slow laps (pit / safety car)
+    </label>
+  </section>
+
+  <section class="drivers">
+    <div class="drivers-header">
+      <h2>Drivers</h2>
+      <div>
+        <button id="selectAll" type="button">All</button>
+        <button id="selectNone" type="button">None</button>
+      </div>
+    </div>
+    <div id="driverList" class="driver-list"></div>
+  </section>
+
+  <p id="status" class="status"></p>
+
+  <section class="panel">
+    <h2>Lap times</h2>
+    <div id="lapChart" class="chart"></div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

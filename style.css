@@ -1,0 +1,114 @@
+:root {
+  --bg: #15151e;
+  --panel: #1f1f2b;
+  --border: #33334a;
+  --text: #f0f0f5;
+  --muted: #9a9ab0;
+  --accent: #e10600;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 24px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+
+.subtitle { color: var(--muted); margin: 4px 0 24px 16px; }
+.subtitle a { color: var(--muted); }
+
+h2 { font-size: 1.1rem; margin: 0 0 12px; }
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.controls label.checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+}
+
+select, button {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+}
+
+select { min-width: 180px; }
+button { cursor: pointer; }
+button:hover { border-color: var(--muted); }
+
+.drivers, .panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.drivers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drivers-header button { padding: 4px 10px; font-size: 0.8rem; margin-left: 6px; }
+
+.driver-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.driver-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--team, #888);
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  opacity: 0.45;
+}
+
+.driver-chip.selected { opacity: 1; background: #2a2a3a; }
+.driver-chip.second { border-left-style: dashed; }
+.driver-chip input { display: none; }
+
+.status { color: var(--muted); min-height: 1.2em; }
+.status.error { color: #ff6b6b; }
+
+.chart { width: 100%; height: 480px; }
