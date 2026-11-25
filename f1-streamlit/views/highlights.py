@@ -105,12 +105,17 @@ with left:
     )
     if not location.empty:
         location = location[(location["x"] != 0) | (location["y"] != 0)]
+        tx, ty = location["x"].to_numpy(), location["y"].to_numpy()
+        # The map keeps its true shape, so a wide track in a narrow column
+        # would leave empty space. Turn wide tracks 90° so they fill the height.
+        if np.ptp(tx) > np.ptp(ty) * 1.15:
+            tx, ty = ty, -tx
         track = go.Figure(go.Scatter(
-            x=location["x"], y=location["y"], mode="lines",
+            x=tx, y=ty, mode="lines",
             line=dict(color="#f0f0f5", width=5), hoverinfo="skip",
         ))
         track.update_layout(
-            **CHART_LAYOUT, height=340, showlegend=False,
+            **CHART_LAYOUT, height=320 if is_mobile() else 540, showlegend=False,
             margin=dict(l=0, r=0, t=0, b=0),
             xaxis=dict(visible=False),
             yaxis=dict(visible=False, scaleanchor="x", scaleratio=1),
