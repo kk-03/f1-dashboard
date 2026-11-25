@@ -88,8 +88,10 @@ with left:
     else:
         flag_html = f'<span style="{flag_style}">{flag_emoji(meeting.get("country_code"))}</span>'
     st.markdown(
-        f'<h2 style="margin:0;padding:0;line-height:1.3">'
-        f'{html.escape(str(meeting["meeting_name"]))}{flag_html}</h2>',
+        # A plain <div> rather than <h2>: Streamlit adds a clickable link icon
+        # to every heading, and this title shouldn't link anywhere.
+        f'<div style="font-size:2rem;font-weight:700;line-height:1.3;margin:0 0 0.2rem">'
+        f'{html.escape(str(meeting["meeting_name"]))}{flag_html}</div>',
         unsafe_allow_html=True,
     )
     st.caption(
@@ -130,7 +132,7 @@ with left:
 with right:
     # --- Podium / top 3 ---------------------------------------------------
     is_race = session.get("session_type") == "Race"
-    st.subheader("Podium" if is_race else "Top 3")
+    st.subheader("Podium" if is_race else "Top 3", anchor=False)
 
     results = get("session_result", {"session_key": session_key})
     if not results.empty and "position" in results:
@@ -172,7 +174,7 @@ with right:
     )
 
     # --- Fastest lap with sector bar ----------------------------------------
-    st.subheader("Fastest lap")
+    st.subheader("Fastest lap", anchor=False)
     fl_num = fastest["driver_number"]
     st.markdown(
         f"**{acronym(fl_num)}** · {team(fl_num)} · "
@@ -207,7 +209,7 @@ with right:
     sec_col, speed_col = st.columns(2)
 
     with sec_col:
-        st.subheader("Fastest sectors")
+        st.subheader("Fastest sectors", anchor=False)
         rows = []
         for i, c in enumerate(sector_cols, start=1):
             if laps[c].notna().any():
@@ -219,7 +221,7 @@ with right:
         st.caption(f"Ideal lap (best sectors combined): **{format_lap(ideal)}**")
 
     with speed_col:
-        st.subheader("Top speeds")
+        st.subheader("Top speeds", anchor=False)
         top = laps.groupby("driver_number")["st_speed"].max().nlargest(3)
         st.dataframe(
             pd.DataFrame({
@@ -236,7 +238,7 @@ with right:
 # ---------------------------------------------------------------------------
 
 st.divider()
-st.subheader("Fastest lap comparison")
+st.subheader("Fastest lap comparison", anchor=False)
 
 options = best_laps["driver_number"].tolist()
 pick_col, axis_col = st.columns([3, 1])

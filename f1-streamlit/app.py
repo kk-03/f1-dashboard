@@ -8,8 +8,8 @@ st.set_page_config(page_title="F1 Telemetry", layout="wide")
 def coming_soon(title: str, slug: str, blurb: str) -> st.Page:
     """A placeholder tab for a page that isn't built yet."""
     def page():
-        st.header(title)
-        st.info("Coming soon")
+        st.header(title, anchor=False)
+        st.info("🚧 Coming soon")
         st.caption(blurb)
 
     page.__name__ = f"soon_{slug}"  # each page function needs a unique name
