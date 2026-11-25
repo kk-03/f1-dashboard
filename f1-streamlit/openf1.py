@@ -80,7 +80,7 @@ def session_picker():
     """
     now = datetime.now(timezone.utc)
     if is_mobile():
-        ui = st.expander("🏁 Choose year / race / session")
+        ui = st.expander("Choose year / race / session")
     else:
         ui = st.sidebar
         ui.header("Session")
